@@ -2,3 +2,4 @@
 .venv
 models+.py
 litreview/litreview/__pycache__
+litreview/critics/__pycache__
