@@ -26,7 +26,7 @@ from django.contrib import admin
 from critics import views
 
 urlpatterns = [
-    url(r"^$", views.index),
+    url(r"^$", views.login),
     url(r"^litreview/", include("critics.urls")),
     url(r"^admin/", admin.site.urls),
 ]
