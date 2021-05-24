@@ -1,0 +1,24 @@
+{% extends 'critics/base.html' %}
+
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+<ul class="messages">
+    {{message}}
+</ul>
+{% endfor %}
+{% endif %}
+
+{% if not user %}
+<h3>Connexion</h3>
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Connexion">
+</form>
+{% else %}
+<h3>Bienvenue {{user}} !</h3>
+<a href="?action=logout">Log out</a>
+{% endif %}
+
+{% endblock %}
