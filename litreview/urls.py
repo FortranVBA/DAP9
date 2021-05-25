@@ -23,11 +23,12 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
-from critics import views
+from account import views
 
 urlpatterns = [
     url(r"^$", views.login),
-    url(r"^litreview/", include("critics.urls")),
+    url(r"^account/", include("account.urls")),
+    url(r"^flux/", include("critics.urls")),
     url(r"^admin/", admin.site.urls),
 ]
 

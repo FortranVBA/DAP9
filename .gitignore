@@ -2,5 +2,11 @@
 .venv
 models+.py
 litreview/__pycache__
+account/__pycache__
+account/migrations/__pycache__
 critics/__pycache__
 critics/migrations/__pycache__
+follow/__pycache__
+follow/migrations/__pycache__
+ticket/__pycache__
+ticket/migrations/__pycache__
