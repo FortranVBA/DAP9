@@ -12,6 +12,14 @@ def flux(request):
     if "username" in request.session:
         active_user = request.session["username"]
 
+    if request.method == "GET":
+        if "action" in request.GET:
+            action = request.GET.get("action")
+            if action == "logout":
+                if "username" in request.session:
+                    request.session.flush()
+                    active_user = ""
+
     if not active_user:
         from account.views import login
 

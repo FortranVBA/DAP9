@@ -53,10 +53,3 @@ def register(request):
         form = UserCreationForm()
 
     return render(request, "account/register.html", {"form": form})
-
-
-# class ViewRegister(SuccessMessageMixin, CreateView):
-#    template_name = "critics/register.html"
-#    form_class = FormRegister
-#    success_message = "Inscription réussie ! Veillez vous connecter."
-#    success_url = reverse_lazy(login)
