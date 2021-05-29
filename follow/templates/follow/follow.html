@@ -1,0 +1,42 @@
+{% extends 'follow/base.html' %}
+
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+<ul class="messages">
+    {{message}}
+</ul>
+{% endfor %}
+{% endif %}
+
+{% if user %}
+
+<h3>Bienvenue {{user}} !</h3>
+<a href="?action=logout">Log out</a>
+
+<h3>Suivre d'autres utilisateurs</h3>
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Envoyer">
+</form>
+
+<h3>Abonnements</h3>
+
+{% for user in following_users %}
+<ul class="user">
+    {{user.username}}
+</ul>
+{% endfor %}
+
+<h3>Abonnés</h3>
+
+{% for user in followed_by %}
+<ul class="user">
+    {{user.username}}
+</ul>
+{% endfor %}
+
+{% endif %}
+
+{% endblock %}

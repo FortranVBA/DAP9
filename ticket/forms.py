@@ -6,4 +6,4 @@ from .models import Ticket
 class FormCreateTicket(forms.ModelForm):
     class Meta:
         model = Ticket
-        fields = ["title", "user", "description", "image"]
+        fields = ["title", "description", "image"]

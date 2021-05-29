@@ -4,26 +4,22 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.shortcuts import render
+from django.contrib.auth import logout
 
 
 def flux(request):
-    active_user = ""
-
-    if "username" in request.session:
-        active_user = request.session["username"]
 
     if request.method == "GET":
         if "action" in request.GET:
             action = request.GET.get("action")
             if action == "logout":
-                if "username" in request.session:
-                    request.session.flush()
-                    active_user = ""
+                if request.user.is_authenticated:
+                    logout(request)
 
-    if not active_user:
-        from account.views import login
+    if not request.user.is_authenticated:
+        from account.views import login_view
 
-        return redirect(reverse_lazy(login))
+        return redirect(reverse_lazy(login_view))
 
-    context = {"user": active_user}
+    context = {"user": request.user}
     return render(request, "critics/flux.html", context)

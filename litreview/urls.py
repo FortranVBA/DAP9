@@ -26,10 +26,11 @@ from django.contrib import admin
 from account import views
 
 urlpatterns = [
-    url(r"^$", views.login),
+    url(r"^$", views.index),
     url(r"^account/", include("account.urls")),
     url(r"^flux/", include("critics.urls")),
     url(r"^ticket/", include("ticket.urls")),
+    url(r"^abonnements/", include("follow.urls")),
     url(r"^admin/", admin.site.urls),
 ]
 
