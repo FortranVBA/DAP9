@@ -8,8 +8,10 @@ from .models import UserFollows
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def follow(request):
     form_login = FormFollow()
 
@@ -19,6 +21,7 @@ def follow(request):
             if action == "logout":
                 if request.user.is_authenticated:
                     logout(request)
+                    return redirect(reverse_lazy("follow"))
 
     if request.method == "POST":
         form_follow = FormFollow(request.POST)
@@ -42,11 +45,6 @@ def follow(request):
                         new_follow.save()
             else:
                 messages.add_message(request, messages.INFO, "User not found")
-
-    if not request.user.is_authenticated:
-        from account.views import login_view
-
-        return redirect(reverse_lazy(login_view))
 
     filter = UserFollows.objects.filter
     following_users = [follow.followed_user for follow in filter(user=request.user)]

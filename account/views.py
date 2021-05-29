@@ -7,7 +7,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect
-from critics.views import flux
 
 
 def login_view(request):
@@ -21,7 +20,7 @@ def login_view(request):
                     logout(request)
 
         if request.user.is_authenticated:
-            return redirect(reverse_lazy(flux))
+            return redirect(reverse_lazy("flux"))
 
     if request.method == "POST":
         form_login = FormLogin(request.POST)
@@ -32,7 +31,7 @@ def login_view(request):
 
             if user is not None:
                 login(request, user)
-                return redirect(reverse_lazy(flux))
+                return redirect(reverse_lazy("flux"))
 
     context = {"form": form_login}
     return render(request, "account/login.html", context)
@@ -44,7 +43,7 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.INFO, "Inscription réussie !")
-            return redirect(reverse_lazy(login_view))
+            return redirect(reverse_lazy("login"))
     else:
         form = UserCreationForm()
 
@@ -52,4 +51,4 @@ def register(request):
 
 
 def index(request):
-    return redirect(reverse_lazy(login_view))
+    return redirect(reverse_lazy("login"))
