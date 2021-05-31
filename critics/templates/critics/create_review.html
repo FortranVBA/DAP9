@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<h3>Bienvenue {{user}} !</h3>
+<a href="?action=logout">Log out</a>
+
+
+<h3>Créer une critique</h3>
+
+<form method="post">{% csrf_token %}
+    <h3>Livre / article</h3>
+    {{ form_ticket.as_p }}
+
+    <h3>Critique</h3>
+    {{ form_review.as_p }}
+    <input type="submit" value="Save">
+</form>
+
+{% endblock %}

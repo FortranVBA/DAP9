@@ -2,14 +2,28 @@
 
 {% block content %}
 
-{% if user %}
-
 <h3>Bienvenue {{user}} !</h3>
 <a href="?action=logout">Log out</a>
 <p>Flux</p>
 <a href="/ticket/create_ticket">Demander une critique</a>
+<a href="/flux/create_review">Créer une critique</a>
 <a href="/abonnements/">Abonnements</a>
 
+{% if messages %}
+{% for message in messages %}
+<ul class="messages">
+    {{message}}
+</ul>
+{% endfor %}
 {% endif %}
+
+{% for post in posts %}
+{% if post.content_type == 'TICKET' %}
+{% include 'critics/ticket.html' with ticket=post %}
+{% elif post.content_type == 'REVIEW' %}
+{% include 'critics/review.html' with review=post %}
+{% endif %}
+{% endfor %}
+
 
 {% endblock %}
