@@ -4,11 +4,7 @@
 
 <h3>Bienvenue {{user}} !</h3>
 <a href="?action=logout">Log out</a>
-<p>Flux</p>
-<a href="/ticket/create_ticket">Demander une critique</a>
-<a href="/flux/create_review">Créer une critique</a>
-<a href="/abonnements/">Abonnements</a>
-<a href="/flux/myposts/">Mes posts</a>
+<p>Vos posts</p>
 
 {% if messages %}
 {% for message in messages %}
@@ -21,9 +17,18 @@
 {% for post in posts %}
 {% if post.content_type == 'TICKET' %}
 {% include 'critics/ticket.html' with ticket=post %}
-<a href="{% url 'review' ticket=post.pk %}">Créer une critique</a>
+<form action="{% url 'del_ticket' ticket=post.pk %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Supprimer">
+</form>
+
 {% elif post.content_type == 'REVIEW' %}
 {% include 'critics/review.html' with review=post %}
+<form action="{% url 'del_review' review=post.pk %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Supprimer">
+</form>
+
 {% endif %}
 {% endfor %}
 

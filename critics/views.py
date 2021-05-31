@@ -10,7 +10,7 @@ from itertools import chain
 from django.db.models import CharField, Value
 from ticket.models import Ticket
 from follow.models import UserFollows
-from django.contrib.auth.models import User
+from .models import Review
 from django.db.models import Subquery
 from django.contrib import messages
 from .forms import FormCreateTicket, FormCreateReview
@@ -43,15 +43,16 @@ def flux(request):
     )
     tickets = tickets_by_user.union(tickets_by_followed_users)
 
-    # returns queryset of tickets
+    reviews_by_user = Review.objects.filter(user=request.user)
+    reviews_by_user = reviews_by_user.annotate(
+        content_type=Value("REVIEW", CharField())
+    )
+    reviews = reviews_by_user
 
     # combine and sort the two types of posts
-    # posts = sorted(
-    #    chain(reviews, tickets), key=lambda post: post.time_created, reverse=True
-    # )
-    posts = tickets
-
-    messages.add_message(request, messages.INFO, "Debug message")
+    posts = sorted(
+        chain(reviews, tickets), key=lambda post: post.time_created, reverse=True
+    )
 
     context["posts"] = posts
 
@@ -89,3 +90,89 @@ def create_review(request):
         "critics/create_review.html",
         {"form_ticket": form_ticket, "form_review": form_review},
     )
+
+
+@login_required
+def reply_review(request, ticket):
+
+    form_review = FormCreateReview()
+    ticket_content = Ticket.objects.get(pk=ticket)
+
+    if request.method == "GET":
+        if "action" in request.GET:
+            action = request.GET.get("action")
+            if action == "logout":
+                if request.user.is_authenticated:
+                    logout(request)
+                    return redirect(reverse_lazy("flux"))
+
+    if request.method == "POST":
+        form_review = FormCreateReview(request.POST)
+        if form_review.is_valid():
+            form_review.instance.user = request.user
+            form_review.instance.ticket = ticket_content
+            form_review.save()
+            return redirect(reverse_lazy("flux"))
+
+    return render(
+        request,
+        "critics/reply_review.html",
+        {"ticket_content": ticket_content, "form_review": form_review},
+    )
+
+
+@login_required
+def myposts(request):
+
+    if request.method == "GET":
+        if "action" in request.GET:
+            action = request.GET.get("action")
+            if action == "logout":
+                if request.user.is_authenticated:
+                    logout(request)
+                    return redirect(reverse_lazy("flux"))
+
+    context = {"user": request.user}
+
+    tickets_by_user = Ticket.objects.filter(user=request.user)
+    tickets_by_user = tickets_by_user.annotate(
+        content_type=Value("TICKET", CharField())
+    )
+    tickets = tickets_by_user
+
+    reviews_by_user = Review.objects.filter(user=request.user)
+    reviews_by_user = reviews_by_user.annotate(
+        content_type=Value("REVIEW", CharField())
+    )
+    reviews = reviews_by_user
+
+    # combine and sort the two types of posts
+    posts = sorted(
+        chain(reviews, tickets), key=lambda post: post.time_created, reverse=True
+    )
+
+    context["posts"] = posts
+
+    return render(request, "critics/your_posts.html", context)
+
+
+@login_required
+def review_delete(request, review):
+
+    review_content = Review.objects.get(pk=review)
+
+    if request.method == "POST":
+        review_content.delete()
+
+    return redirect(reverse_lazy("myposts"))
+
+
+@login_required
+def ticket_delete(request, ticket):
+
+    ticket_content = Ticket.objects.get(pk=ticket)
+
+    if request.method == "POST":
+        ticket_content.delete()
+
+    return redirect(reverse_lazy("myposts"))
