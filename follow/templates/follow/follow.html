@@ -17,16 +17,20 @@
 
 <h3>Suivre d'autres utilisateurs</h3>
 <form method="post">{% csrf_token %}
-    {{ form.as_p }}
+    {{ form_login.as_p }}
     <input type="submit" value="Envoyer">
 </form>
 
 <h3>Abonnements</h3>
 
-{% for user in following_users %}
+{% for userfollows in following_users %}
 <ul class="user">
-    {{user.username}}
+    {{userfollows.followed_user.username}}
 </ul>
+<form action="{% url 'unfollow' userfollows=userfollows.pk %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Désabonner">
+</form>
 {% endfor %}
 
 <h3>Abonnés</h3>

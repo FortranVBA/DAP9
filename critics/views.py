@@ -31,6 +31,7 @@ def flux(request):
 
     context = {"user": request.user}
 
+    # Get tickets to be included
     tickets_by_user = Ticket.objects.filter(user=request.user)
     tickets_by_user = tickets_by_user.annotate(
         content_type=Value("TICKET", CharField())
@@ -43,13 +44,29 @@ def flux(request):
     tickets_by_followed_users = tickets_by_followed_users.annotate(
         content_type=Value("TICKET", CharField())
     )
+
     tickets = tickets_by_user.union(tickets_by_followed_users)
 
+    # Get reviews to be included
     reviews_by_user = Review.objects.filter(user=request.user)
     reviews_by_user = reviews_by_user.annotate(
         content_type=Value("REVIEW", CharField())
     )
-    reviews = reviews_by_user
+
+    reviews_by_followed_users = Review.objects.filter(
+        user__in=Subquery(users_followed.values("followed_user"))
+    )
+    reviews_by_followed_users = reviews_by_followed_users.annotate(
+        content_type=Value("REVIEW", CharField())
+    )
+
+    reviews_reply = Review.objects.filter(
+        ticket__in=Subquery(tickets_by_user.values("id"))
+    )
+    reviews_reply = reviews_reply.annotate(content_type=Value("REVIEW", CharField()))
+
+    reviews = reviews_by_user.union(reviews_by_followed_users)
+    reviews = reviews.union(reviews_reply)
 
     # combine and sort the two types of posts
     posts = sorted(
