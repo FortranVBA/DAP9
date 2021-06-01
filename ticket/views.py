@@ -1,9 +1,10 @@
 # Create your views here.
 
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from .forms import FormCreateTicket
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Ticket
 
 
 class CreateTicket(LoginRequiredMixin, CreateView):
@@ -22,3 +23,10 @@ class CreateTicket(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+
+class TicketUpdateView(LoginRequiredMixin, UpdateView):
+
+    model = Ticket
+    fields = ["title", "description", "image"]
+    success_url = "/"

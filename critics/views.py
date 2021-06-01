@@ -14,6 +14,8 @@ from .models import Review
 from django.db.models import Subquery
 from django.contrib import messages
 from .forms import FormCreateTicket, FormCreateReview
+from django.views.generic.edit import UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 @login_required
@@ -176,3 +178,10 @@ def ticket_delete(request, ticket):
         ticket_content.delete()
 
     return redirect(reverse_lazy("myposts"))
+
+
+class ReviewUpdateView(LoginRequiredMixin, UpdateView):
+
+    model = Review
+    fields = ["headline", "rating", "body"]
+    success_url = "/"

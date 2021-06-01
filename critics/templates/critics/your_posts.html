@@ -21,6 +21,7 @@
     {% csrf_token %}
     <input type="submit" value="Supprimer">
 </form>
+<a href="{% url 'update_ticket' pk=post.pk %}">Modifier ticket</a>
 
 {% elif post.content_type == 'REVIEW' %}
 {% include 'critics/review.html' with review=post %}
@@ -28,6 +29,7 @@
     {% csrf_token %}
     <input type="submit" value="Supprimer">
 </form>
+<a href="{% url 'update_review' pk=post.pk %}">Modifier critique</a>
 
 {% endif %}
 {% endfor %}
