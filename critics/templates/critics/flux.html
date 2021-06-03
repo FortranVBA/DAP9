@@ -3,12 +3,10 @@
 {% block content %}
 
 <h3>Bienvenue {{user}} !</h3>
-<a href="?action=logout">Log out</a>
+
 <p>Flux</p>
 <a href="/ticket/create_ticket">Demander une critique</a>
 <a href="/flux/create_review">Créer une critique</a>
-<a href="/abonnements/">Abonnements</a>
-<a href="/flux/myposts/">Mes posts</a>
 
 {% if messages %}
 {% for message in messages %}

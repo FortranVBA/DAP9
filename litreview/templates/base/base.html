@@ -14,9 +14,9 @@
     {% load static %}
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'account/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'base/css/bootstrap.min.css' %}" />
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'account/css/business-casual.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'base/css/business-casual.css' %}" />
 
     <!-- Fonts -->
     <link
@@ -37,8 +37,7 @@
 
 <body>
 
-    <div class="brand">Business Casual</div>
-    <div class="address-bar">3481 Melrose Place | Beverly Hills, CA 90210 | 123.456.7890</div>
+    <div class="brand">LITReview</div>
 
     <!-- Navigation -->
     <nav class="navbar navbar-default" role="navigation">
@@ -59,19 +58,16 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="index.html">Home</a>
+                        <a href="/flux/">Flux</a>
                     </li>
                     <li>
-                        <a href="about.html">About</a>
+                        <a href="/flux/myposts">Posts</a>
                     </li>
                     <li>
-                        <a href="blog.html">Blog</a>
+                        <a href="/abonnements/">Abonnements</a>
                     </li>
                     <li>
-                        <a href="contact.html">Contact</a>
-                    </li>
-                    <li>
-                        <a href="../register">Register</a>
+                        <a href="?action=logout">Se déconnecter</a>
                     </li>
                 </ul>
             </div>
@@ -102,10 +98,10 @@
     </footer>
 
     <!-- jQuery -->
-    <script src="{% static 'account/js/jquery.js' %}"></script>
+    <script src="{% static 'base/js/jquery.js' %}"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="{% static 'account/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'base/js/bootstrap.min.js' %}"></script>
 
 </body>
 

@@ -1,4 +1,4 @@
-{% extends 'base/base.html' %}
+{% extends 'base/base_login.html' %}
 
 {% block content %}
 
@@ -10,10 +10,13 @@
 {% endfor %}
 {% endif %}
 
+<h3>Inscrivez-vous maintenant</h3>
+<a href="../register">S'inscrire</a>
+
 <h3>Connexion</h3>
 <form method="post">{% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Connexion">
+    <input type="submit" value="Se connecter">
 </form>
 
 {% endblock %}
