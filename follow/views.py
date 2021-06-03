@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required
-def follow(request):
+def get_follow_view(request):
     form_login = FormFollow(prefix="form_login")
 
     if request.method == "GET":
@@ -24,33 +24,28 @@ def follow(request):
                     return redirect(reverse_lazy("follow"))
 
     if request.method == "POST":
-        if "form_login" or True in request.POST:
-            form_follow = FormFollow(request.POST, prefix="form_login")
+        form_follow = FormFollow(request.POST, prefix="form_login")
 
-            if form_follow.is_valid():
-                follow_user = form_follow.cleaned_data["followname"]
-                if User.objects.filter(username=follow_user).exists():
-                    if str(follow_user) == str(request.user):
-                        messages.add_message(request, messages.INFO, "Same user")
+        if form_follow.is_valid():
+            follow_user = form_follow.cleaned_data["followname"]
+            if User.objects.filter(username=follow_user).exists():
+                if str(follow_user) == str(request.user):
+                    messages.add_message(request, messages.INFO, "Same user")
+                else:
+                    if UserFollows.objects.filter(
+                        user=request.user,
+                        followed_user=User.objects.get(username=follow_user),
+                    ).exists():
+                        messages.add_message(request, messages.INFO, "Already followed")
                     else:
-                        if UserFollows.objects.filter(
+                        messages.add_message(request, messages.INFO, "Follow created")
+                        new_follow = UserFollows(
                             user=request.user,
                             followed_user=User.objects.get(username=follow_user),
-                        ).exists():
-                            messages.add_message(
-                                request, messages.INFO, "Already followed"
-                            )
-                        else:
-                            messages.add_message(
-                                request, messages.INFO, "Follow created"
-                            )
-                            new_follow = UserFollows(
-                                user=request.user,
-                                followed_user=User.objects.get(username=follow_user),
-                            )
-                            new_follow.save()
-                else:
-                    messages.add_message(request, messages.INFO, "User not found")
+                        )
+                        new_follow.save()
+            else:
+                messages.add_message(request, messages.INFO, "User not found")
 
     filter = UserFollows.objects.filter
     following_users = filter(user=request.user)
@@ -66,11 +61,12 @@ def follow(request):
 
 
 @login_required
-def unfollow(request, userfollows):
+def unfollow_user(request, userfollows):
 
     userfollows_content = UserFollows.objects.get(pk=userfollows)
 
     if request.method == "POST":
-        userfollows_content.delete()
+        if request.user == userfollows_content.user:
+            userfollows_content.delete()
 
     return redirect(reverse_lazy("follow"))

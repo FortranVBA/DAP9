@@ -9,7 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect
 
 
-def login_view(request):
+def get_login_view(request):
     form_login = FormLogin()
 
     if request.method == "GET":
@@ -37,7 +37,7 @@ def login_view(request):
     return render(request, "account/login.html", context)
 
 
-def register(request):
+def register_user(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -50,5 +50,5 @@ def register(request):
     return render(request, "account/register.html", {"form": form})
 
 
-def index(request):
+def get_index(request):
     return redirect(reverse_lazy("login"))

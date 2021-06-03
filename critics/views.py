@@ -19,7 +19,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 @login_required
-def flux(request):
+def get_flux_view(request):
 
     if request.method == "GET":
         if "action" in request.GET:
@@ -141,7 +141,7 @@ def reply_review(request, ticket):
 
 
 @login_required
-def myposts(request):
+def get_myposts_view(request):
 
     if request.method == "GET":
         if "action" in request.GET:
@@ -176,23 +176,25 @@ def myposts(request):
 
 
 @login_required
-def review_delete(request, review):
+def delete_review(request, review):
 
     review_content = Review.objects.get(pk=review)
 
     if request.method == "POST":
-        review_content.delete()
+        if request.user == review_content.user:
+            review_content.delete()
 
     return redirect(reverse_lazy("myposts"))
 
 
 @login_required
-def ticket_delete(request, ticket):
+def delete_ticket(request, ticket):
 
     ticket_content = Ticket.objects.get(pk=ticket)
 
     if request.method == "POST":
-        ticket_content.delete()
+        if request.user == ticket_content.user:
+            ticket_content.delete()
 
     return redirect(reverse_lazy("myposts"))
 

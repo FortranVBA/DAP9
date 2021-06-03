@@ -26,7 +26,7 @@ from django.contrib import admin
 from account import views
 
 urlpatterns = [
-    url(r"^$", views.index, name="index"),
+    url(r"^$", views.get_index, name="index"),
     url(r"^account/", include("account.urls")),
     url(r"^flux/", include("critics.urls")),
     url(r"^ticket/", include("ticket.urls")),
