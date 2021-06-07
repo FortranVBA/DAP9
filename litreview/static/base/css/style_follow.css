@@ -1,0 +1,79 @@
+
+.follow_users_title{
+    font-size: 3rem;    
+    font-weight: bold;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.followed_user_name{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.followed_user_button{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.follow_users_button{
+    display: flex;
+    justify-content: center;
+}
+
+.follow_users_button_row{
+    display: flex;
+    flex-direction: row;
+    padding: 2rem; 
+}
+
+.follow_users_button_row p{
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0;
+    flex-direction: column;
+    text-align:center;
+}
+
+.list_followed_users{
+    font-size: 3rem;    
+    font-weight: bold;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.followed_user_container{
+    width: 80vw;
+    margin: auto;
+}
+
+.followed_user_row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: black;
+    border-style: solid;       
+}
+
+.user{
+    font-size: 2rem;   
+    padding: 1rem;
+}
+
+.list_follow_by_users{
+    font-size: 3rem;    
+    font-weight: bold;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;   
+}
+
+.follow_by_user_container{
+    width: 80vw;
+    margin: auto;
+}

@@ -2,19 +2,26 @@
 
 {% block content %}
 
-<h3>Bienvenue {{user}} !</h3>
-<a href="?action=logout">Log out</a>
 
+<div class="create_critic_title">Créer une critique</div>
 
-{% include 'critics/ticket.html' with ticket=ticket_content %}
+<div class="create_critic_container">
+    <div class="create_critic_content">
+        <div class="create_critic_subtitle">Vous êtes en train de poster en réponse à</div>
+        <div class="create_critic_ticket_border">
+            {% include 'critics/ticket.html' with ticket=ticket_content %}
+        </div>
+    </div>
+</div>
 
-<h3>Créer une critique</h3>
-
-<form method="post">{% csrf_token %}
-
-    <h3>Critique</h3>
-    {{ form_review.as_p }}
-    <input type="submit" value="Save">
-</form>
+<div class="create_critic_container">
+    <div class="create_critic_content">
+        <form method="post">{% csrf_token %}
+            <div class="create_critic_subtitle">Critique</div>
+            {{ form_review.as_p }}
+            <input type="submit" value="Envoyer">
+        </form>
+    </div>
+</div>
 
 {% endblock %}

@@ -2,10 +2,26 @@
 
 {% block content %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save">
-</form>
+<div class="create_critic_title">Modifier votre critique</div>
+
+<div class="create_critic_container">
+    <div class="create_critic_content">
+        <div class="create_critic_subtitle">Vous êtes en train de poster en réponse à</div>
+        <div class="create_critic_ticket_border">
+            {% include 'critics/ticket.html' with ticket=ticket %}
+        </div>
+    </div>
+</div>
+
+<div class="create_critic_container">
+    <div class="create_critic_content">
+        <form method="post">
+            <div class="create_critic_subtitle">Critique</div>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Envoyer">
+        </form>
+    </div>
+</div>
 
 {% endblock %}

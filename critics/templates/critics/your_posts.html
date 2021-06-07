@@ -2,10 +2,6 @@
 
 {% block content %}
 
-<h3>Bienvenue {{user}} !</h3>
-<a href="?action=logout">Log out</a>
-<p>Vos posts</p>
-
 {% if messages %}
 {% for message in messages %}
 <ul class="messages">
@@ -14,24 +10,40 @@
 {% endfor %}
 {% endif %}
 
+<div class="your_posts_title">
+    Vos posts
+</div>
+
 {% for post in posts %}
-{% if post.content_type == 'TICKET' %}
-{% include 'critics/ticket.html' with ticket=post %}
-<form action="{% url 'del_ticket' ticket=post.pk %}" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Supprimer">
-</form>
-<a href="{% url 'update_ticket' pk=post.pk %}">Modifier ticket</a>
+<div class="container_post">
 
-{% elif post.content_type == 'REVIEW' %}
-{% include 'critics/review.html' with review=post %}
-<form action="{% url 'del_review' review=post.pk %}" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Supprimer">
-</form>
-<a href="{% url 'update_review' pk=post.pk %}">Modifier critique</a>
+    <div class=post>
+        {% if post.content_type == 'TICKET' %}
+        {% include 'critics/ticket.html' with ticket=post %}
+        <div class="container_button_review">
+            <form action="{% url 'update_ticket' pk=post.pk %}">
+                <input type="submit" value="Modifier ticket" />
+            </form>
+            <form action="{% url 'del_ticket' ticket=post.pk %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Supprimer">
+            </form>
+        </div>
+        {% elif post.content_type == 'REVIEW' %}
+        {% include 'critics/review.html' with review=post %}
+        <div class="container_button_review">
+            <form action="{% url 'update_review' pk=post.pk %}">
+                <input type="submit" value="Modifier critique" />
+            </form>
+            <form action="{% url 'del_review' review=post.pk %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Supprimer">
+            </form>
 
-{% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endfor %}
 
 

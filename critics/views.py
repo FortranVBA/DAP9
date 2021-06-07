@@ -158,5 +158,12 @@ def delete_ticket(request, ticket):
 class ReviewUpdateView(LoginRequiredMixin, UpdateView):
 
     model = Review
-    fields = ["headline", "rating", "body"]
     success_url = "/"
+    form_class = FormCreateReview
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["ticket"] = self.get_object().ticket
+
+        return context

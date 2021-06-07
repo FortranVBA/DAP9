@@ -1,7 +1,25 @@
-<h1>Review</h1>
-<p>Ticket : {{review.ticket}}</p>
-<p>Rating : {{review.rating}}</p>
-<p>Headline : {{review.headline}}</p>
-<p>Body : {{review.body}}</p>
-<p>User : {{review.user}}</p>
-<p>Time created : {{review.time_created}}</p>
+<div class="review_date_user">
+    <div class="review_user"> {{review.user}} a publié une critique</div>
+    <div class="review_date">{{review.time_created}}</div>
+</div>
+
+<div class="review_title_rating">
+    <div class="review_title"> {{review.headline}}</div>
+    <div class="review_rating">{{review.rating}}</div>
+</div>
+
+<div class="review_body">
+    {{review.body}}
+</div>
+
+<div class="review_ticket_container">
+    <div class="review_ticket_user">
+        Ticket - {{review.ticket.user}}
+    </div>
+    <div class="review_ticket_title">
+        {{review.ticket.title}}
+    </div>
+    <div class="review_ticket_image">
+        {{review.ticket.image}}
+    </div>
+</div>

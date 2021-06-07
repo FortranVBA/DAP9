@@ -10,37 +10,52 @@
 {% endfor %}
 {% endif %}
 
-{% if user %}
+<div class="follow_users_title">
+    Suivre d'autres utilisateurs
+</div>
+<div class="follow_users_button">
+    <form method="post">{% csrf_token %}
+        <div class="follow_users_button_row">
+            {{ form_login.as_p }}
+            <input type="submit" value="Envoyer">
+        </div>
+    </form>
+</div>
 
-<h3>Bienvenue {{user}} !</h3>
-<a href="?action=logout">Log out</a>
-
-<h3>Suivre d'autres utilisateurs</h3>
-<form method="post">{% csrf_token %}
-    {{ form_login.as_p }}
-    <input type="submit" value="Envoyer">
-</form>
-
-<h3>Abonnements</h3>
+<div class="list_followed_users">
+    Abonnements
+</div>
 
 {% for userfollows in following_users %}
-<ul class="user">
-    {{userfollows.followed_user.username}}
-</ul>
-<form action="{% url 'unfollow' userfollows=userfollows.pk %}" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Désabonner">
-</form>
+<div class="followed_user_container">
+    <div class="followed_user_row">
+        <div class="followed_user_name">
+            <ul class="user">
+                {{userfollows.followed_user.username}}
+            </ul>
+        </div>
+        <div class="followed_user_button">
+            <form action="{% url 'unfollow' userfollows=userfollows.pk %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Désabonner">
+            </form>
+        </div>
+    </div>
+</div>
 {% endfor %}
 
-<h3>Abonnés</h3>
+<div class="list_follow_by_users">
+    Abonnés
+</div>
 
 {% for user in followed_by %}
-<ul class="user">
-    {{user.username}}
-</ul>
+<div class="follow_by_user_container">
+    <div class="followed_user_row">
+        <ul class="user">
+            {{user.username}}
+        </ul>
+    </div>
+</div>
 {% endfor %}
-
-{% endif %}
 
 {% endblock %}

@@ -32,6 +32,12 @@ def get_login_view(request):
             if user is not None:
                 login(request, user)
                 return redirect(reverse_lazy("flux"))
+            else:
+                messages.add_message(
+                    request,
+                    messages.INFO,
+                    "Nom / mot de passe incorrect",
+                )
 
     context = {"form": form_login}
     return render(request, "account/login.html", context)
@@ -42,7 +48,11 @@ def register_user(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.INFO, "Inscription réussie !")
+            messages.add_message(
+                request,
+                messages.INFO,
+                "Inscription réussie ! Vous pouvez vous connecter.",
+            )
             return redirect(reverse_lazy("login"))
     else:
         form = UserCreationForm()

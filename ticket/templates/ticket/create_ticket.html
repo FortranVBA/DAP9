@@ -2,12 +2,14 @@
 
 {% block content %}
 
-{% if user %}
-<h3>Création ticket</h3>
-<form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Création">
-</form>
-{% endif %}
+<div class="create_ticket_title">
+    Création ticket
+</div>
+<div class="ticket_form_container">
+    <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Envoyer">
+    </form>
+</div>
 
 {% endblock %}

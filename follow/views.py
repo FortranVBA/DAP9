@@ -30,22 +30,30 @@ def get_follow_view(request):
             follow_user = form_follow.cleaned_data["followname"]
             if User.objects.filter(username=follow_user).exists():
                 if str(follow_user) == str(request.user):
-                    messages.add_message(request, messages.INFO, "Same user")
+                    messages.add_message(
+                        request,
+                        messages.INFO,
+                        "Vous ne pouvez pas vous suivre vous-même.",
+                    )
                 else:
                     if UserFollows.objects.filter(
                         user=request.user,
                         followed_user=User.objects.get(username=follow_user),
                     ).exists():
-                        messages.add_message(request, messages.INFO, "Already followed")
+                        messages.add_message(
+                            request, messages.INFO, "Vous suivez déjà cette personne."
+                        )
                     else:
-                        messages.add_message(request, messages.INFO, "Follow created")
+                        messages.add_message(
+                            request, messages.INFO, "Abonnement ajouté"
+                        )
                         new_follow = UserFollows(
                             user=request.user,
                             followed_user=User.objects.get(username=follow_user),
                         )
                         new_follow.save()
             else:
-                messages.add_message(request, messages.INFO, "User not found")
+                messages.add_message(request, messages.INFO, "Utilisateur inconnu.")
 
     filter = UserFollows.objects.filter
     following_users = filter(user=request.user)
@@ -68,5 +76,7 @@ def unfollow_user(request, userfollows):
     if request.method == "POST":
         if request.user == userfollows_content.user:
             userfollows_content.delete()
+
+            messages.add_message(request, messages.INFO, "Abonnement supprimé.")
 
     return redirect(reverse_lazy("follow"))

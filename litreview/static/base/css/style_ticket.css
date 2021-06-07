@@ -1,0 +1,28 @@
+
+.create_ticket_title{
+    font-size: 3rem;    
+    font-weight: bold;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.ticket_form_container{
+    padding: 3vw;
+    width: 90vw;
+    display: flex;
+    justify-content: center;    
+}
+
+.ticket_form_container p{
+    display: flex;
+    justify-content: flex-start;
+}
+
+
+.ticket_form_container input{
+    width: 30vw;    
+    display: flex;
+    justify-content: center;
+}
+

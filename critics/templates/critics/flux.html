@@ -2,11 +2,18 @@
 
 {% block content %}
 
-<h3>Bienvenue {{user}} !</h3>
-
-<p>Flux</p>
-<a href="/ticket/create_ticket">Demander une critique</a>
-<a href="/flux/create_review">Créer une critique</a>
+<div class="button_container_flux">
+    <div class="button_content">
+        <form action="/ticket/create_ticket">
+            <button type="submit">Demander une critique</button>
+        </form>
+    </div>
+    <div class="button_content">
+        <form action="/flux/create_review">
+            <button type="submit">Créer une critique</button>
+        </form>
+    </div>
+</div>
 
 {% if messages %}
 {% for message in messages %}
@@ -17,12 +24,21 @@
 {% endif %}
 
 {% for post in posts %}
-{% if post.content_type == 'TICKET' %}
-{% include 'critics/ticket.html' with ticket=post %}
-<a href="{% url 'review' ticket=post.pk %}">Créer une critique</a>
-{% elif post.content_type == 'REVIEW' %}
-{% include 'critics/review.html' with review=post %}
-{% endif %}
+<div class="container_post">
+    <div class=post>
+        {% if post.content_type == 'TICKET' %}
+        {% include 'critics/ticket.html' with ticket=post %}
+        <div class="container_button_review">
+            <form action="{% url 'review' ticket=post.pk %}">
+                <button type="submit">Créer une critique</button>
+            </form>
+        </div>
+
+        {% elif post.content_type == 'REVIEW' %}
+        {% include 'critics/review.html' with review=post %}
+        {% endif %}
+    </div>
+</div>
 {% endfor %}
 
 

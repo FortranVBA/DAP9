@@ -1,0 +1,111 @@
+/* Global CSS */
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+@media screen and (min-width: 801px) {
+    html {
+      font-size: 62.5%;
+    }
+}
+  
+  /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+  @media screen and (max-width: 800px) {
+    html {
+      font-size: 1.6vw;
+    }
+  }
+
+h1{
+    font-size: 2.6rem;
+}
+
+h2{
+    font-size: 4.8rem;
+}
+
+h3{
+    font-size: 3rem;
+}
+
+h4, h5{
+    font-size: 2.8rem;
+}
+
+li{
+    font-size: 2rem;
+	list-style-type: none;
+}
+
+a{
+    color:darkblue;
+    text-decoration: none;    
+}
+
+p{
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2rem;
+    flex-direction: column;
+    text-align:center;
+}
+
+label{
+    display: flex;
+    justify-content: center;
+}
+
+ul{
+    padding-bottom: 2rem;
+}
+
+li{
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;        
+}
+
+span{
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;    
+}
+
+input[type=submit]{
+    padding: 1rem;
+}
+
+input[type=text]{
+    width: 20vw;
+    padding: 0.5rem;
+    justify-content: center;    
+}
+
+input[type=password]{
+    width: 20vw;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;      
+}
+
+.messages{
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    color:rgb(238, 12, 31);
+}
+
+a:link{
+    color: white;
+    font-size: 2rem;    
+}
+
+a:visited{
+    color: white;
+    font-size: 2rem;    
+}

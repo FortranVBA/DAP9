@@ -1,0 +1,51 @@
+
+
+
+@media screen and (min-width: 801px) {
+    .container_login{
+        display: flex;
+        justify-content: space-around;
+        min-height: 70vh;
+        flex-direction: row;
+    }    
+}
+@media screen and (max-width: 800px) {
+    .container_login{
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+    }    
+}
+
+.block_inscription{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.block_login{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.block_title{
+    font-size: 2rem;    
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.block_content{
+    display: flex;
+    justify-content: center;
+}
+
+.button_right{
+    display: flex;
+    justify-content: flex-end;
+}

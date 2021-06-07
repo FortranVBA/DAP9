@@ -1,6 +1,16 @@
-<h1>Ticket</h1>
-<p>Titre : {{ticket.title}}</p>
-<p>Description : {{ticket.description}}</p>
-<p>User : {{ticket.user}}</p>
-<p>Image : {{ticket.image}}</p>
-<p>Création : {{ticket.time_created}}</p>
+<div class="ticket_date_user">
+    <div class="ticket_user"> {{ticket.user}} a demandé une critique</div>
+    <div class="ticket_date">{{ticket.time_created}}</div>
+</div>
+
+<div class="ticket_title">
+    {{ticket.title}}
+</div>
+
+<div class="ticket_description">
+    {{ticket.description}}
+</div>
+
+<div class="ticket_image">
+    {{ticket.image}}
+</div>

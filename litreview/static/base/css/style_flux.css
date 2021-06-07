@@ -1,0 +1,111 @@
+
+.button_container_flux{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 3rem;
+}
+
+.container_post{
+    display: flex;
+    justify-content: center;
+}
+
+.post{
+    border: black;
+    border-style: solid;
+    padding: 3vw;
+    width: 60vw;
+}
+
+.ticket_date_user{
+    display: flex;
+    direction: row;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+.ticket_user{
+    font-size: 2rem;
+}
+
+.ticket_date{
+    font-size: 1.5rem;
+}
+
+.ticket_title{
+    font-size: 2rem;
+    padding: 2rem;
+}
+
+.ticket_description{
+    font-size: 2rem;
+    padding: 2rem;
+}
+
+.container_button_review{
+    display: flex;
+    justify-content: flex-end;
+    padding: 2rem;
+}
+
+
+.review_date_user{
+    display: flex;
+    direction: row;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+.review_user{
+    font-size: 2rem;
+}
+
+.review_date{
+    font-size: 1.5rem;
+}
+
+.review_title_rating{
+    display: flex;
+    direction: row;
+    justify-content: flex-start;
+    padding: 2rem;
+}
+
+.review_title{
+    font-size: 2rem;
+    padding: 2rem;
+}
+
+.review_rating{
+    font-size: 2rem;
+    padding: 2rem;
+}
+
+.review_body{
+    font-size: 2rem;
+    padding: 2rem;
+}
+
+.review_ticket_container{
+    border: black;
+    border-style: solid;
+}
+
+.review_ticket_user{
+    font-size: 2rem;
+    padding: 2rem;
+}
+
+.review_ticket_title{
+    font-size: 2rem;
+    padding: 2rem;
+}
+
+.your_posts_title{
+    font-size: 4rem;    
+    font-weight: bold;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}

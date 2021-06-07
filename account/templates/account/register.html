@@ -2,12 +2,27 @@
 
 {% block content %}
 
-<h3>Inscription</h3>
-
-<h3>form.as_p</h3>
-<form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save">
-</form>
+<div class="container_register">
+    <div class="block_title_register">
+        Inscrivez vous
+    </div>
+    <div class="block_content_register">
+        <form id="register" method="post">{% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+        </form>
+        <form id="return" action="/">
+        </form>
+        <div class="button_container_register">
+            <div class="button_content">
+                <button form="return" type="submit">Retourner</button>
+            </div>
+            <div class="button_content">
+                <button form="register" type="submit">S'inscrire</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

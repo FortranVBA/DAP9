@@ -1,0 +1,27 @@
+
+.main-head{
+    background: #000000;
+    background-size: 100vw 20vh;
+    color: #ffffff;
+    align-items: center;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+.main_title{
+    font-size: 2.6rem;
+    font-weight: bold;
+}
+
+.content_title{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.content_nav{
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+}

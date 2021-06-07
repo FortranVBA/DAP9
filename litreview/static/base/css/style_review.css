@@ -1,0 +1,45 @@
+
+.create_critic_title{
+    font-size: 3rem;    
+    font-weight: bold;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.create_critic_container{
+    display: flex;
+    justify-content: center;
+}
+
+.create_critic_content{
+    border: black;
+    border-style: solid;
+    padding: 3vw;
+    width: 90vw;
+}
+
+.create_critic_subtitle{
+    font-size: 2rem;    
+    font-weight: bold;
+}
+
+.create_critic_content label{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.create_critic_content ul{
+    display: flex;
+    flex-direction: row;
+}
+
+.create_critic_content li{
+    padding-right: 3rem;
+}
+
+.create_critic_ticket_border{
+    border: black;
+    border-style: solid;
+    padding: 1rem;
+}
