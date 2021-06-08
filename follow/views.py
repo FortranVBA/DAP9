@@ -1,3 +1,5 @@
+"""Project OC DAP 9 - Follow views file."""
+
 from django.shortcuts import render
 
 # Create your views here.
@@ -13,6 +15,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def get_follow_view(request):
+    """Get the follow user view."""
     form_login = FormFollow(prefix="form_login")
 
     if request.method == "GET":
@@ -70,7 +73,7 @@ def get_follow_view(request):
 
 @login_required
 def unfollow_user(request, userfollows):
-
+    """Unfollow user and redirect to the follow user view."""
     userfollows_content = UserFollows.objects.get(pk=userfollows)
 
     if request.method == "POST":

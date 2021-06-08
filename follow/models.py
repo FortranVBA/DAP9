@@ -1,3 +1,5 @@
+"""Project OC DAP 9 - Follow models file."""
+
 from django.db import models
 
 from django.contrib.auth.models import User
@@ -6,7 +8,7 @@ from django.contrib.auth.models import User
 
 
 class UserFollows(models.Model):
-    # Your UserFollows model definition goes here
+    """UserFollows model."""
 
     user = models.ForeignKey(
         User,
@@ -20,8 +22,8 @@ class UserFollows(models.Model):
     )
 
     class Meta:
-        # ensures we don't get multiple UserFollows instances
-        # for unique user-user_followed pairs
+        """Form meta properties."""
+
         unique_together = (
             "user",
             "followed_user",

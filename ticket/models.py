@@ -1,3 +1,5 @@
+"""Project OC DAP 9 - Ticket models file."""
+
 from django.db import models
 
 from django.conf import settings
@@ -5,11 +7,12 @@ from django.db.models import CharField, Value
 from follow.models import UserFollows
 from django.db.models import Subquery
 
-# Create your models here.
-
 
 class TicketManager(models.Manager):
+    """Ticket model manager."""
+
     def get_by_user(self, username):
+        """Get tickets by user."""
         tickets_by_user = self.filter(user=username)
         tickets_by_user = tickets_by_user.annotate(
             content_type=Value("TICKET", CharField())
@@ -17,7 +20,7 @@ class TicketManager(models.Manager):
         return tickets_by_user
 
     def get_user_flux(self, username):
-        # Get tickets to be included
+        """Get tickets to be shown as flux."""
         tickets_by_user = self.get_by_user(username)
 
         users_followed = UserFollows.objects.filter(user=username)
@@ -33,7 +36,8 @@ class TicketManager(models.Manager):
 
 
 class Ticket(models.Model):
-    # Your Ticket model definition goes here
+    """Ticket model."""
+
     title = models.CharField(max_length=128)
     description = models.TextField(max_length=2048, blank=True)
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

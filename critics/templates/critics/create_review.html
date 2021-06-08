@@ -6,7 +6,8 @@
     Créer une critique
 </div>
 
-<form method="post">{% csrf_token %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
     <div class="create_critic_container">
         <div class="create_critic_content">
             <div class="create_critic_subtitle">Livre / article</div>

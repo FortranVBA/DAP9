@@ -1,3 +1,5 @@
+"""Project OC DAP 9 - Ticket url file."""
+
 from django.conf.urls import url
 
 from . import views  # import views so we can use them in urls.

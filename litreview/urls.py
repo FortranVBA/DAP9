@@ -25,6 +25,8 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from account import views
 
+from django.conf.urls.static import static
+
 urlpatterns = [
     url(r"^$", views.get_index, name="index"),
     url(r"^account/", include("account.urls")),
@@ -32,7 +34,7 @@ urlpatterns = [
     url(r"^ticket/", include("ticket.urls")),
     url(r"^abonnements/", include("follow.urls")),
     url(r"^admin/", admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar

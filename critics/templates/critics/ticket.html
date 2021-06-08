@@ -11,6 +11,8 @@
     {{ticket.description}}
 </div>
 
+{% if ticket.image %}
 <div class="ticket_image">
-    {{ticket.image}}
+    <img class="ticket_image" src="{{ticket.image.url}}">
 </div>
+{% endif %}

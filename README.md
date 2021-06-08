@@ -1,0 +1,40 @@
+# LITReview MVP: Book review application
+
+LITReview is a MVP (Minimal Viable Product) application to be executed locally in the context
+of OpenClassroom educational project. It allow registered users to ask for book reviews, post book reviews and reply to book review requests with a system of following other users.
+This application has been developed with the Django framework, using SQlite database.
+As MVP purpose, a SQlite database with precreated users and reviews is included with the application.
+
+## Installation
+
+This locally-executable application can be installed and executed from [http://localhost:8000/](http://localhost:8000/) using the following steps.
+
+1. Clone this repository using $ git clone `https://github.com/FortranVBA/DAP9.git` (you can also download the code using [as a zip file](https://github.com/FortranVBA/DAP9/archive/refs/heads/main.zip))
+2. Move to the application root folder with `$ cd DAP9`
+3. Create a virtual environment for the project with `$ py -m venv env` on windows or `$ python3 -m venv env` on macos or linux.
+4. Activate the virtual environment with `$ env\Scripts\activate` on windows or `$ source env/bin/activate` on macos or linux.
+5. Install project dependencies with `$ pip install -r requirements.txt`
+6. Create and populate the project database with `$ python manage.py create_db`
+7. Run the server with `$ python manage.py runserver`
+
+When the server is running after step 7 of the procedure, the LITReview application can be used with the following base URL: http://localhost:8000/.
+
+Steps 1-3 and 5-6 are only required for initial installation. For subsequent launches of the application, you only have to execute steps 4 and 7 from the root folder of the project.
+
+## Usage with user profiles
+
+One you have launched the server, the main application entry point can be reached by visiting [http://localhost:8000/api/v1/titles/](http://localhost:8000/api/v1/titles/).
+
+You can either register as a new user, or use one of the already created users:
+-	Username: aze ; Password: a1z2e3r4
+-	Username: azer ; Password: a1z2e3r4
+-	Username: jean_5679 ; Password: a1z2e3r4
+-	Username: sarahj ; Password: a1z2e3r4
+-	Username: severine123 ; Password: a1z2e3r4
+
+## Admin panel
+
+One you have launched the server, the Danjgo default admin panel can be reached by visiting [http://localhost:8000/admin/](http://localhost:8000/admin/).
+
+The super user admin has the following login:
+-	Username: admin ; Password: admin

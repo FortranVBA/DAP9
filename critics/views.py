@@ -1,4 +1,4 @@
-# Create your views here.
+"""Project OC DAP 9 - Critics views file."""
 
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -16,7 +16,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 @login_required
 def get_flux_view(request):
-
+    """Get the flux view."""
     if request.method == "GET":
         if "action" in request.GET:
             action = request.GET.get("action")
@@ -45,7 +45,7 @@ def get_flux_view(request):
 
 @login_required
 def create_review(request):
-
+    """Get the review creation view."""
     form_ticket = FormCreateTicket()
     form_review = FormCreateReview()
 
@@ -58,7 +58,7 @@ def create_review(request):
                     return redirect(reverse_lazy("flux"))
 
     if request.method == "POST":
-        ticket_form = FormCreateTicket(request.POST)
+        ticket_form = FormCreateTicket(request.POST, request.FILES)
         review_form = FormCreateReview(request.POST)
         if ticket_form.is_valid() and review_form.is_valid():
             ticket_form.instance.user = request.user
@@ -78,7 +78,7 @@ def create_review(request):
 
 @login_required
 def reply_review(request, ticket):
-
+    """Get the review created as ticket reply view."""
     form_review = FormCreateReview()
     ticket_content = Ticket.objects.get(pk=ticket)
 
@@ -107,7 +107,7 @@ def reply_review(request, ticket):
 
 @login_required
 def get_myposts_view(request):
-
+    """Get the user posts view."""
     if request.method == "GET":
         if "action" in request.GET:
             action = request.GET.get("action")
@@ -133,7 +133,7 @@ def get_myposts_view(request):
 
 @login_required
 def delete_review(request, review):
-
+    """Delete the review and redirect to the user posts view."""
     review_content = Review.objects.get(pk=review)
 
     if request.method == "POST":
@@ -145,7 +145,7 @@ def delete_review(request, review):
 
 @login_required
 def delete_ticket(request, ticket):
-
+    """Delete the ticket and redirect to the user posts view."""
     ticket_content = Ticket.objects.get(pk=ticket)
 
     if request.method == "POST":
@@ -156,12 +156,14 @@ def delete_ticket(request, ticket):
 
 
 class ReviewUpdateView(LoginRequiredMixin, UpdateView):
+    """Get the review update view."""
 
     model = Review
     success_url = "/"
     form_class = FormCreateReview
 
     def get_context_data(self, **kwargs):
+        """Add the ticket object to the context."""
         context = super().get_context_data(**kwargs)
 
         context["ticket"] = self.get_object().ticket

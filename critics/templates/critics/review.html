@@ -19,7 +19,9 @@
     <div class="review_ticket_title">
         {{review.ticket.title}}
     </div>
-    <div class="review_ticket_image">
-        {{review.ticket.image}}
+    {% if review.ticket.image %}
+    <div class="ticket_image">
+        <img class="ticket_image" src="{{review.ticket.image.url}}">
     </div>
+    {% endif %}
 </div>

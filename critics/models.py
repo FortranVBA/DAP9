@@ -1,3 +1,5 @@
+"""Project OC DAP 9 - Critics models file."""
+
 from django.db import models
 
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -11,7 +13,10 @@ from django.db.models import Subquery
 
 
 class ReviewManager(models.Manager):
+    """Review model manager."""
+
     def get_by_user(self, username):
+        """Get reviews by user."""
         reviews_by_user = self.filter(user=username)
         reviews_by_user = reviews_by_user.annotate(
             content_type=Value("REVIEW", CharField())
@@ -20,6 +25,7 @@ class ReviewManager(models.Manager):
         return reviews_by_user
 
     def get_user_flux(self, username):
+        """Get reviews to be shown as flux."""
         reviews_by_user = self.get_by_user(username)
 
         users_followed = UserFollows.objects.filter(user=username)
@@ -44,6 +50,8 @@ class ReviewManager(models.Manager):
 
 
 class Review(models.Model):
+    """Review model."""
+
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(
         # validates that rating must be between 0 and 5

@@ -1,3 +1,5 @@
+"""Project OC DAP 9 - Account views file."""
+
 from django.shortcuts import render
 
 # Create your views here.
@@ -10,6 +12,7 @@ from django.shortcuts import redirect
 
 
 def get_login_view(request):
+    """Get the user login view."""
     form_login = FormLogin()
 
     if request.method == "GET":
@@ -44,6 +47,7 @@ def get_login_view(request):
 
 
 def register_user(request):
+    """Get the user register view."""
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -61,4 +65,5 @@ def register_user(request):
 
 
 def get_index(request):
+    """Get the default main view."""
     return redirect(reverse_lazy("login"))
