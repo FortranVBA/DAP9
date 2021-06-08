@@ -5,6 +5,11 @@ of OpenClassroom educational project. It allow registered users to ask for book 
 This application has been developed with the Django framework, using SQlite database.
 As MVP purpose, a SQlite database with precreated users and reviews is included with the application.
 
+## Warning
+
+This application is intented for local execution and shall not be used as such in production !
+The current image upload system is not designed to prevent malicious file upload to the server.
+
 ## Installation
 
 This locally-executable application can be installed and executed from [http://localhost:8000/](http://localhost:8000/) using the following steps.
