@@ -1,11 +1,16 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
+<div class="create_ticket_title">
+    Modifier votre ticket
+</div>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save">
-</form>
+<div class="ticket_form_container">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Envoyer">
+    </form>
+</div>
 
 {% endblock %}

@@ -7,7 +7,6 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from .forms import FormFollow
 from .models import UserFollows
-from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -28,35 +27,10 @@ def get_follow_view(request):
 
     if request.method == "POST":
         form_follow = FormFollow(request.POST, prefix="form_login")
-
         if form_follow.is_valid():
             follow_user = form_follow.cleaned_data["followname"]
-            if User.objects.filter(username=follow_user).exists():
-                if str(follow_user) == str(request.user):
-                    messages.add_message(
-                        request,
-                        messages.INFO,
-                        "Vous ne pouvez pas vous suivre vous-même.",
-                    )
-                else:
-                    if UserFollows.objects.filter(
-                        user=request.user,
-                        followed_user=User.objects.get(username=follow_user),
-                    ).exists():
-                        messages.add_message(
-                            request, messages.INFO, "Vous suivez déjà cette personne."
-                        )
-                    else:
-                        messages.add_message(
-                            request, messages.INFO, "Abonnement ajouté"
-                        )
-                        new_follow = UserFollows(
-                            user=request.user,
-                            followed_user=User.objects.get(username=follow_user),
-                        )
-                        new_follow.save()
-            else:
-                messages.add_message(request, messages.INFO, "Utilisateur inconnu.")
+            message = UserFollows.objects.follow_user(request.user, follow_user)
+            messages.add_message(request, messages.INFO, message)
 
     filter = UserFollows.objects.filter
     following_users = filter(user=request.user)

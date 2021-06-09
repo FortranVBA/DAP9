@@ -28,7 +28,7 @@ Steps 1-3 and 5-6 are only required for initial installation. For subsequent lau
 
 ## Usage with user profiles
 
-One you have launched the server, the main application entry point can be reached by visiting [http://localhost:8000/api/v1/titles/](http://localhost:8000/api/v1/titles/).
+One you have launched the server, the main application entry point can be reached by visiting [http://localhost:8000/](http://localhost:8000/).
 
 You can either register as a new user, or use one of the already created users:
 -	Username: aze ; Password: a1z2e3r4

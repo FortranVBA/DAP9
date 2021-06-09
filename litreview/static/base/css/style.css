@@ -79,6 +79,10 @@ input[type=submit]{
     padding: 1rem;
 }
 
+button[type=submit]{
+    padding: 1rem;
+}
+
 input[type=text]{
     width: 20vw;
     padding: 0.5rem;
