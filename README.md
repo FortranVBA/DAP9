@@ -41,7 +41,7 @@ You can either register as a new user, or use one of the already created users:
 
 ## Admin panel
 
-One you have launched the server, the Danjgo default admin panel can be reached by visiting [http://localhost:8000/admin/](http://localhost:8000/admin/).
+One you have launched the server, the Django default admin panel can be reached by visiting [http://localhost:8000/admin/](http://localhost:8000/admin/).
 
 The super user admin has the following login:
 -	Username: admin ; Password: admin
