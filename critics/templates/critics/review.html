@@ -5,8 +5,17 @@
 
 <div class="review_title_rating">
     <div class="review_title"> {{review.headline}}</div>
-    <div class="review_rating">{{review.rating}} &#9733</div>
+    <div class="review_rating">
+        {% for i in '01234'|make_list %}
+        {% if review.rating >= forloop.counter %}
+        &#9733
+        {% else %}
+        &#9734
+        {% endif %}
+        {% endfor %}
+    </div>
 </div>
+
 
 <div class="review_body">
     {{review.body}}
