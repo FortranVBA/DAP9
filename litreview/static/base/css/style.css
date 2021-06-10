@@ -40,11 +40,6 @@ li{
 	list-style-type: none;
 }
 
-a{
-    color:darkblue;
-    text-decoration: none;    
-}
-
 p{
     font-size: 1.5rem;
     display: flex;
@@ -104,12 +99,17 @@ input[type=password]{
     color:rgb(238, 12, 31);
 }
 
-a:link{
+a{
+    color:darkblue;
+    text-decoration: none;    
+}
+
+.content_nav a:link{
     color: white;
     font-size: 2rem;    
 }
 
-a:visited{
+.content_nav a:visited{
     color: white;
     font-size: 2rem;    
 }
