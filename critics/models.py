@@ -15,20 +15,24 @@ from django.db.models import Subquery
 class ReviewManager(models.Manager):
     """Review model manager."""
 
-    def get_by_user(self, username):
-        """Get reviews by user."""
-        reviews_by_user = self.filter(user=username)
+    def get_by_user(self, user):
+        """Get user reviews."""
+        reviews_by_user = self.filter(user=user)
         reviews_by_user = reviews_by_user.annotate(
             content_type=Value("REVIEW", CharField())
         )
 
         return reviews_by_user
 
-    def get_user_flux(self, username):
-        """Get reviews to be shown as flux."""
-        reviews_by_user = self.get_by_user(username)
+    def get_user_flux(self, user):
+        """Get reviews to be shown as flux.
 
-        users_followed = UserFollows.objects.filter(user=username)
+        The reviews to be included as flux are reviews created by user, reviews in
+        response to ticket created by user and reviews created by followed users.
+        """
+        reviews_by_user = self.get_by_user(user)
+
+        users_followed = UserFollows.objects.filter(user=user)
 
         reviews_by_followed_users = self.filter(
             user__in=Subquery(users_followed.values("followed_user"))
@@ -37,7 +41,7 @@ class ReviewManager(models.Manager):
             content_type=Value("REVIEW", CharField())
         )
 
-        tickets_by_user = Ticket.objects.get_by_user(username)
+        tickets_by_user = Ticket.objects.get_by_user(user)
         reviews_reply = self.filter(ticket__in=Subquery(tickets_by_user.values("id")))
         reviews_reply = reviews_reply.annotate(
             content_type=Value("REVIEW", CharField())

@@ -12,7 +12,7 @@ class TicketManager(models.Manager):
     """Ticket model manager."""
 
     def get_by_user(self, username):
-        """Get tickets by user."""
+        """Get user tickets."""
         tickets_by_user = self.filter(user=username)
         tickets_by_user = tickets_by_user.annotate(
             content_type=Value("TICKET", CharField())
@@ -20,7 +20,11 @@ class TicketManager(models.Manager):
         return tickets_by_user
 
     def get_user_flux(self, username):
-        """Get tickets to be shown as flux."""
+        """Get tickets to be shown as flux.
+
+        The tickets to be included as flux are tickets created by user and tickets
+        created by followed users.
+        """
         tickets_by_user = self.get_by_user(username)
 
         users_followed = UserFollows.objects.filter(user=username)
