@@ -1,7 +1,7 @@
 # LITReview MVP: Book review application
 
-LITReview is a MVP (Minimal Viable Product) application to be executed locally in the context
-of OpenClassroom educational project. It allow registered users to ask for book reviews, post book reviews and reply to book review requests with a system of following other users.
+LITReview is a MVP (Minimal Viable Product) application to be executed locally in the context of OpenClassroom educational project. 
+It allow registered users to ask for book reviews, post book reviews and reply to book review requests with a system of following other users from the community.
 This application has been developed with the Django framework, using SQlite database.
 As MVP purpose, a SQlite database with precreated users and reviews is included with the application.
 
@@ -30,7 +30,7 @@ For subsequent launches of the application, you only have to execute the followi
 1. Activate the virtual environment with `$ .venv\Scripts\activate` on windows or `$ source .venv/bin/activate` on macos or linux.
 2. Run the server with `$ python manage.py runserver`
 
-One you have launched the server, the main application entry point can be reached by visiting [http://localhost:8000/](http://localhost:8000/).
+Once you have launched the server, the main application entry point can be reached by visiting [http://localhost:8000/](http://localhost:8000/).
 
 You can either register as a new user, or use one of the already created users:
 -	Username: aze ; Password: a1z2e3r4
@@ -41,7 +41,7 @@ You can either register as a new user, or use one of the already created users:
 
 ## Admin panel
 
-One you have launched the server, the Django default admin panel can be reached by visiting [http://localhost:8000/admin/](http://localhost:8000/admin/).
+Once you have launched the server, the Django default admin panel can be reached by visiting [http://localhost:8000/admin/](http://localhost:8000/admin/).
 
 The super user admin has the following login:
 -	Username: admin ; Password: admin
